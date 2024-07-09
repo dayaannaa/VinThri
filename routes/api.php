@@ -22,6 +22,9 @@ Route::get('/api/products', [ProductController::class, 'display']);
 
 Route::post('/addtocart/{product_id}', [CartController::class, 'store']);
 
+Route::post('carts/checkout', [CartController::class, 'checkout']);
+
+
 // Route::middleware('auth:api')->get('/carts', [CartController::class, 'index']);
 
 //WAG NITO BURAHIN HA, MAG SESESSION DAPAT AKO E KASO DI KO MAGAWA PERO JAN MO LANG BAKA KELANGANIN
