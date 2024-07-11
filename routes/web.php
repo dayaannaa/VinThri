@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 
@@ -22,6 +23,9 @@ Route::view('/customers', 'customers.index');
 Route::view('/login', 'auth.login');
 
 Route::view('/carts', 'carts.index');
+
+Route::get('users', [UserController::class, 'index']);
+
 
 //Display ng product
 Route::get('/products/display', function () {

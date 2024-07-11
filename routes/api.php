@@ -8,6 +8,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\UserController;
+
 
 Route::post('login', [AuthController::class, 'login']);
 
@@ -23,6 +25,10 @@ Route::get('/api/products', [ProductController::class, 'display']);
 Route::post('/addtocart/{product_id}', [CartController::class, 'store']);
 
 Route::post('carts/checkout', [CartController::class, 'checkout']);
+
+Route::get('users', [UserController::class, 'getUsers']);
+Route::post('users/change-status', [UserController::class, 'changeStatus']);
+Route::post('users/change-type', [UserController::class, 'changeType']);
 
 
 // Route::middleware('auth:api')->get('/carts', [CartController::class, 'index']);
