@@ -3,11 +3,13 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\HomepageController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
+Route::view('/home', 'home');
 
 Route::view('/suppliers', 'suppliers.index');
 
