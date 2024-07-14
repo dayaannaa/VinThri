@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Customer extends Model
 {
+    use SoftDeletes;
+
     protected $primaryKey = 'customer_id';
 
     protected $fillable = [
@@ -16,6 +19,8 @@ class Customer extends Model
         'email',
         'user_id'
     ];
+
+    protected $dates = ['deleted_at'];
 
     public function user()
     {

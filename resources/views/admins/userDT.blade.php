@@ -7,6 +7,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body>
 <div class="container">
@@ -25,7 +26,6 @@
     </table>
 </div>
 
-{{-- MODEL TO AH YUNG NAG PA-POP UP PARA SA ANO TO CHANGE STATUS--}}
 <div class="modal fade" id="changeStatusModal" tabindex="-1" aria-labelledby="changeStatusModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -47,7 +47,6 @@
   </div>
 </div>
 
-{{-- ETO NAMAN PARA SA ROLE--}}
 <div class="modal fade" id="changeTypeModal" tabindex="-1" aria-labelledby="changeTypeModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -60,6 +59,7 @@
           <option value="0">Admin</option>
           <option value="1">Customer</option>
         </select>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -70,82 +70,102 @@
 </div>
 
 <script type="text/javascript">
-$(document).ready(function() {
-    var userId;
+    $(document).ready(function() {
+        var userId;
 
-    var table = $('#users-table').DataTable({
-        ajax: {
-            url: '/api/users',
-            dataSrc: 'data'
-        },
-        columns: [
-            { data: 'first_name' },
-            { data: 'last_name' },
-            { data: 'email' },
-            { data: 'status' },
-            { data: 'type', render: function(data, type, row) {
-                return data == 0 ? 'Admin' : 'Customer';
-            }},
-            { data: 'user_id', orderable: false, searchable: false, render: function(data, type, row) {
-                    return '<button data-id="' + data + '" class="btn btn-primary btn-sm change-status">Change Status</button>'
-                        + '<button data-id="' + data + '" class="btn btn-secondary btn-sm change-type">Change Type</button>';
+        var table = $('#users-table').DataTable({
+            ajax: {
+                url: '/api/users',
+                dataSrc: 'data'
+            },
+            columns: [
+                { data: 'first_name' },
+                { data: 'last_name' },
+                { data: 'email' },
+                { data: 'status' },
+                { data: 'type', render: function(data, type, row) {
+                    return data == 0 ? 'Admin' : 'Customer';
+                }},
+                { data: 'user_id', orderable: false, searchable: false, render: function(data, type, row) {
+                        return '<button data-id="' + data + '" class="btn btn-primary btn-sm change-status">Change Status</button>'
+                            + '<button data-id="' + data + '" class="btn btn-secondary btn-sm change-type">Change Type</button>';
+                    }
+                },
+            ]
+        });
+
+        $(document).on('click', '.change-status', function() {
+            userId = $(this).data('id');
+            $('#changeStatusModal').modal('show');
+        });
+
+        $('#saveStatusBtn').click(function() {
+            var newStatus = $('#newStatus').val();
+            $.ajax({
+                url: '/api/users/change-status',
+                method: 'POST',
+                data: {
+                    user_id: userId,
+                    status: newStatus
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                dataType: 'json',
+                success: function(data) {
+                    $('#changeStatusModal').modal('hide');
+                    table.ajax.reload();
+                    alert(data.success);
                 }
-            },
-        ]
-    });
+            });
+        });
 
-    $(document).on('click', '.change-status', function() {
-        userId = $(this).data('id');
-        $('#changeStatusModal').modal('show');
-    });
+        $(document).on('click', '.change-type', function() {
+            userId = $(this).data('id');
+            $.ajax({
+                url: '/api/users/details',
+                method: 'POST',
+                data: {
+                    user_id: userId
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                dataType: 'json',
+                success: function(data) {
+                    var user = data.user;
+                    var userType = user.type == 0 ? 'Admin' : 'Customer';
+                    var transferType = user.type == 0 ? 'Customer' : 'Admin';
 
-    $('#saveStatusBtn').click(function() {
-        var newStatus = $('#newStatus').val();
-        $.ajax({
-            url: '/api/users/change-status',
-            method: 'POST',
-            data: {
-                user_id: userId,
-                status: newStatus
-            },
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-            dataType: 'json',
-            success: function(data) {
-                $('#changeStatusModal').modal('hide');
-                table.ajax.reload();
-                alert(data.success);
-            }
+                    $('#userAddress').text(user.address || 'N/A');
+                    $('#userImage').attr('src', user.image ? '/imgs/' + user.image : 'https://via.placeholder.com/100');
+
+                    $('#changeTypeModal').modal('show');
+                }
+            });
+        });
+
+        $('#saveTypeBtn').click(function() {
+            var newType = $('#newType').val();
+            $.ajax({
+                url: '/api/users/change-type',
+                method: 'POST',
+                data: {
+                    user_id: userId,
+                    type: newType
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                dataType: 'json',
+                success: function(data) {
+                    $('#changeTypeModal').modal('hide');
+                    table.ajax.reload();
+                    alert(data.message);
+                }
+            });
         });
     });
-
-    $(document).on('click', '.change-type', function() {
-        userId = $(this).data('id');
-        $('#changeTypeModal').modal('show');
-    });
-
-    $('#saveTypeBtn').click(function() {
-        var newType = $('#newType').val();
-        $.ajax({
-            url: '/api/users/change-type',
-            method: 'POST',
-            data: {
-                user_id: userId,
-                type: newType
-            },
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-            dataType: 'json',
-            success: function(data) {
-                $('#changeTypeModal').modal('hide');
-                table.ajax.reload();
-                alert(data.success);
-            }
-        });
-    });
-});
 </script>
 </body>
 </html>

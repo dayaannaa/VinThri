@@ -9,6 +9,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\OrderController;
 
 
 Route::post('login', [AuthController::class, 'login']);
@@ -19,6 +20,7 @@ Route::apiResource('products', ProductController::class);
 Route::apiResource('admins', AdminController::class);
 Route::apiResource('customers', CustomerController::class);
 Route::apiResource('carts', CartController::class);
+// Route::apiResource('users', UserController::class);
 
 Route::get('/api/products', [ProductController::class, 'display']);
 
@@ -29,6 +31,17 @@ Route::post('carts/checkout', [CartController::class, 'checkout']);
 Route::get('users', [UserController::class, 'getUsers']);
 Route::post('users/change-status', [UserController::class, 'changeStatus']);
 Route::post('users/change-type', [UserController::class, 'changeType']);
+Route::put('users/{user_id}', [UserController::class, 'update']);
+Route::post('users/details', [UserController::class, 'getUserDetails']);
+
+// Route::get('orders', [OrderController::class, 'index']);
+// Route::get('/orders/{id}/products', [OrderController::class, 'getOrderProducts']);
+// Route::get('/api/orders', [OrderController::class, 'index']);
+
+Route::get('orders', [OrderController::class, 'index']);
+Route::get('/orders/{id}/products', [OrderController::class, 'getOrderProducts'])->name('orders.products');
+Route::put('/orders/{orderId}/status', [OrderController::class, 'updateStatus']);
+
 
 
 // Route::middleware('auth:api')->get('/carts', [CartController::class, 'index']);

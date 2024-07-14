@@ -26,10 +26,11 @@ return new class extends Migration
             $table->foreign('user_id')
             ->references('user_id')
             ->on('users')
-            ->onDelete('cascade'); // This line adds the delete cascade
+            ->onDelete('cascade');
 
-      // Index for faster lookup if needed
       $table->index('user_id');
+
+      $table->softDeletes();
         });
     }
 

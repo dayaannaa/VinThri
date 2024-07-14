@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Log;
 use App\Models\Customer;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Models\Inventory;
 class CartController extends Controller
 {
 // public function index(Request $request)
@@ -144,27 +145,73 @@ public function index(Request $request)
         }
     }
 
+//     public function checkout(Request $request)
+//     {
+//         $request->validate([
+//             'customer_id' => 'required|exists:customers,customer_id',
+//             'products' => 'required|array',
+//             'products.*.product_id' => 'required|exists:products,product_id',
+//             'status' => 'nullable|string|max:255',
+//             'products.*.quantity' => 'required|integer|min:1'
+//         ]);
 
-    public function checkout(Request $request)
-    {
-        $request->validate([
-            'customer_id' => 'required|exists:customers,customer_id',
-            'products' => 'required|array',
-            'products.*.product_id' => 'required|exists:products,product_id',
-            'status' => 'nullable|string|max:255',
-            'products.*.quantity' => 'required|integer|min:1'
-        ]);
+//         try {
+//             DB::beginTransaction();
 
-        try {
-            DB::beginTransaction();
+//             $order = new Order();
+//             $order->customer_id = $request->input('customer_id');
+//             $order->date = now();
+//             $order->status = $request->input('status') ?? 'pending';
+//             $order->save();
 
-            $order = new Order();
-            $order->customer_id = $request->input('customer_id');
-            $order->date = now();
-            $order->status = $request->input('status') ?? 'pending';
-            $order->save();
+//             foreach ($request->input('products') as $product) {
+//                 $orderItem = new OrderItem();
+//                 $orderItem->order_id = $order->order_id;
+//                 $orderItem->product_id = $product['product_id'];
+//                 $orderItem->quantity = $product['quantity'];
+//                 $orderItem->save();
 
-            foreach ($request->input('products') as $product) {
+//                 Cart::where('customer_id', $order->customer_id)
+//                     ->where('product_id', $product['product_id'])
+//                     ->delete();
+//             }
+
+//             DB::commit();
+
+//             return response()->json(['message' => 'Checkout successful'], 200);
+//         } catch (\Exception $e) {
+//             DB::rollBack();
+//             return response()->json(['error' => 'Checkout failed', 'details' => $e->getMessage()], 500);
+//         }
+//     }
+// }
+
+
+public function checkout(Request $request)
+{
+    $request->validate([
+        'customer_id' => 'required|exists:customers,customer_id',
+        'products' => 'required|array',
+        'products.*.product_id' => 'required|exists:products,product_id',
+        'status' => 'nullable|string|max:255',
+        'products.*.quantity' => 'required|integer|min:1'
+    ]);
+
+    try {
+        DB::beginTransaction();
+        $order = new Order();
+        $order->customer_id = $request->input('customer_id');
+        $order->date = now();
+        $order->status = $request->input('status') ?? 'pending';
+        $order->save();
+
+        foreach ($request->input('products') as $product) {
+            $inventory = Inventory::where('product_id', $product['product_id'])->first();
+
+            if ($inventory && $inventory->stock >= $product['quantity']) {
+                $inventory->stock -= $product['quantity'];
+                $inventory->save();
+
                 $orderItem = new OrderItem();
                 $orderItem->order_id = $order->order_id;
                 $orderItem->product_id = $product['product_id'];
@@ -174,16 +221,19 @@ public function index(Request $request)
                 Cart::where('customer_id', $order->customer_id)
                     ->where('product_id', $product['product_id'])
                     ->delete();
+            } else {
+                throw new \Exception('Insufficient stock for product ID: ' . $product['product_id']);
             }
-
-            DB::commit();
-
-            return response()->json(['message' => 'Checkout successful'], 200);
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return response()->json(['error' => 'Checkout failed', 'details' => $e->getMessage()], 500);
         }
+
+        DB::commit();
+
+        return response()->json(['message' => 'Checkout successful'], 200);
+    } catch (\Exception $e) {
+        DB::rollBack();
+        \Log::error('Checkout failed', ['error' => $e->getMessage()]);
+
+        return response()->json(['error' => 'Checkout failed', 'details' => $e->getMessage()], 500);
     }
 }
-
-
+}

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\OrderController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -24,8 +25,9 @@ Route::view('/login', 'auth.login');
 
 Route::view('/carts', 'carts.index');
 
-Route::get('users', [UserController::class, 'index']);
+// Route::view('/orders', 'orders.order-details');
 
+Route::get('users', [UserController::class, 'index']);
 
 //Display ng product
 Route::get('/products/display', function () {
@@ -43,3 +45,15 @@ Route::get('/products/add_to_cart/{product_id}', function ($product_id) {
 //         return view('cart.index');
 //     })->name('cart.index');
 // });
+
+
+// Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+// Route::view('/orders', 'orders.order-details');
+
+// Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+
+Route::view('/orders', 'orders.order-details');
+Route::view('/admin-orders', 'orders.admin-order');
+// Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+
+

@@ -14,6 +14,10 @@
     <div id="customer-info" style="display: none;">
         <p>Customer ID: <span id="customer-id"></span></p>
     </div>
+
+    <div id="admin-info" style="display: none;">
+        <p>Admin ID: <span id="admin-id"></span></p>
+    </div>
 </body>
 </html>
 
@@ -38,12 +42,17 @@ $(document).ready(function() {
 
                 localStorage.setItem('token', response.token);
                 localStorage.setItem('customer_id', response.customer_id);
+                localStorage.setItem('admin_id', response.admin_id); // Store admin_id in localStorage
 
                 $('#customer-id').text(response.customer_id);
                 $('#customer-info').show();
 
+                $('#admin-id').text(response.admin_id);
+                $('#admin-info').show();
+
                 alert('Logged in account user ID: ' + response.user_id);
                 alert('Customer ID: ' + response.customer_id);
+                alert('Admin ID: ' + response.admin_id);
 
                 window.location.href = '/products/display';
             },
@@ -53,6 +62,7 @@ $(document).ready(function() {
         });
     });
 
+    // AJAX request to get user info (optional)
     $.ajax({
         url: 'api/user',
         type: 'GET',

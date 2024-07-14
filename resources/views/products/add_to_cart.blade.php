@@ -20,6 +20,7 @@
         .image-selection input {
             margin-right: 5px;
         }
+
     </style>
 </head>
 <body>

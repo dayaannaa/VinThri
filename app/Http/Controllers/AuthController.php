@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Customer;
 use Illuminate\Support\Facades\Log;
+use App\Models\Admin;
 class AuthController extends Controller
 {
     public function login(Request $request)
@@ -23,37 +24,35 @@ class AuthController extends Controller
             return response()->json(['error' => 'Invalid credentials'], 401);
         }
 
-        if ($user->type === 0) {
-            session(['admin_id' => $user->admin_id]);
-        }
-
-        $credentials = $request->only('email', 'password');
-
-        if (Auth::attempt($credentials)) {
+        // Attempt to authenticate the user
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $user = Auth::user();
             $token = $user->createToken('authToken')->plainTextToken;
-
             $customer_id = null;
+            $admin_id = null;
+
             if ($user->type === 1) {
+                // If the user type is customer
                 $customer = Customer::where('user_id', $user->user_id)->first();
                 $customer_id = $customer ? $customer->customer_id : null;
-
                 session(['customer_id' => $customer_id]);
                 Log::info('Customer ID set in session:', ['customer_id' => $customer_id]);
-
+            } elseif ($user->type === 0) {
+                // If the user type is admin
+                $admin = Admin::where('user_id', $user->user_id)->first();
+                $admin_id = $admin ? $admin->admin_id : null;
+                session(['admin_id' => $admin_id]);
             }
 
             return response()->json([
                 'token' => $token,
                 'user_id' => $user->user_id,
-                'customer_id' => $customer_id
-
+                'customer_id' => $customer_id,
+                'admin_id' => $admin_id // Include admin_id in the response
             ], 200);
-
-
-        } else {
-            return response()->json(['error' => 'Invalid credentials'], 401);
         }
 
+        // Authentication failed
+        return response()->json(['error' => 'Invalid credentials'], 401);
     }
 }
