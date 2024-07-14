@@ -128,10 +128,10 @@
                         <div class="d-flex flex-grow-1 align-items-center">
                             <ul class="navbar-nav d-flex flex-row mb-2 mb-lg-0 ms-3">
                                 <li class="nav-item ml-4">
-                                    <a class="nav-link active" style="color:#5F6F52;" aria-current="page" href="#">Home</a>
+                                    <a class="nav-link active" style="color:#5F6F52;" aria-current="page" href="{{ url('/home') }}">Home</a>
                                 </li>
                                 <li class="nav-item ms-3 ml-4">
-                                    <a class="nav-link" style="color:#5F6F52;" href="#">Shop</a>
+                                    <a class="nav-link" style="color:#5F6F52;" href="{{ url('/products/display') }}">Shop</a>
                                 </li>
                                 <li class="nav-item ms-3 ml-4">
                                     <a class="nav-link" style="color:#5F6F52;" href="#">Reviews</a>
@@ -146,7 +146,7 @@
                             </div>
                             <ul class="navbar-nav d-flex flex-row ms-auto mb-2 mb-lg-0">
                                 <li class="nav-item ms-3">
-                                    <a class="nav-link" href="#"><i class="bi bi-cart cart-icon mr-3 position-relative" style="color:#5F6F52; font-weight: bold; font-size: 18px"></i></a>
+                                    <a class="nav-link" href="{{ url('/carts') }}"><i class="bi bi-cart cart-icon mr-3 position-relative" style="color:#5F6F52; font-weight: bold; font-size: 18px"></i></a>
                                 </li>
                                 <li class="nav-item ms-3">
                                     <a class="nav-link profile-icon mr-3 position-relative" href="#" style="color:#5F6F52;">

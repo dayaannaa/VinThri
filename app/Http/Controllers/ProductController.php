@@ -8,7 +8,7 @@ use App\Models\ProductSupply;
 use App\Models\Inventory;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class ProductController extends Controller
+class ProductController extends Controller      
 {
     public function index()
     {

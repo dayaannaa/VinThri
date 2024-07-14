@@ -4,12 +4,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\OrderController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
+Route::view('/home', 'home');
 
 Route::view('/suppliers', 'suppliers.index');
 
