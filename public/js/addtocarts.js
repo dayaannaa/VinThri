@@ -5,19 +5,19 @@
 
 $(document).ready(function () {
     var path = window.location.pathname;
-    var productId = path.split('/').pop(); 
+    var productId = path.split('/').pop();
 
     $.ajax({
-        url: '/api/products/' + productId, 
+        url: '/api/products/' + productId,
         method: 'GET',
         dataType: 'json',
         success: function (product) {
-            var images = product.images.split(','); 
+            var images = product.images.split(',');
             var imagesHtml = '';
             var radioButtonsHtml = '';
 
             images.forEach(function (image, index) {
-                var isChecked = index === 0 ? 'checked' : ''; 
+                var isChecked = index === 0 ? 'checked' : '';
 
                 imagesHtml += `
                     <div class="product-image" id="image-${productId}-${index}" style="display: ${index === 0 ? 'block' : 'none'}; width: 350px; margin-left: 200px; border-radius: 15px;">
@@ -34,14 +34,14 @@ $(document).ready(function () {
                             <div class="col-md-12 col-xl-10">
                                 <div class="radio-buttons"> ${radioButtonsHtml} </div>
                                 <p><strong>Price:</strong> ${product.price}</p>
-                                <p>${product.description}</p>   
+                                <p>${product.description}</p>
                                 <label for="quantity">Quantity:</label>
                                 <input type="number" id="quantity" name="quantity" value="1" min="1" class="form-control" style="width: 100px; margin-bottom: 10px;">
                                 <div class="card-actions justify-end">
                                     <button id="addToCartBtn" class="btn btn-primary">Add to Cart</button>
                                 </div>
                             </div>
-                            </div> 
+                            </div>
                             </div>*/}
             var productHtml = `
                 <div class="container" style="padding-right: 50px; margin-top: 20px;">
@@ -53,7 +53,7 @@ $(document).ready(function () {
                         <div class="col" style="margin-top: 30px; margin-left: 50px;">
                             <h2 style="font-family: Alfa Slab One, serif; color: #B99470; font-size: 35px;">${product.name}</h2>
                             <p style="font-family: Poppins, sans-serif; font-weight: 600; color: #A9B388; font-size: 30px;"><strong>&#8369; </strong>${product.price}</p>
-                            <p style="width: 500px;">${product.description}</p>   
+                            <p style="width: 500px;">${product.description}</p>
                         <div class="row" style="align-items: center; margin-top: 150px;">
                             <div class="col-auto">
                                 <label for="quantity" style="font-family: Poppins, sans-serif; color: #5F6F52; font-size: 14px;">Quantity:</label>
@@ -61,7 +61,7 @@ $(document).ready(function () {
                             <div class="col-auto">
                                 <input type="number" id="quantity" name="quantity" value="1" min="1" class="form-control" style="margin-bottom: 10px; font-family: Poppins, sans-serif; color: #5F6F52;
                                 background-color: rgba(169, 179, 136, 0.3); border-radius: 30px; height: 25px; width: 100px; margin-left: 320px;">
-                            </div> 
+                            </div>
                             <div style="width: 510px; height: 1px; background-color: rgba(185, 148, 112, 0.3); margin-left: 15px; margin-top: 10px;"> </div>
                         </div>
                             <div style="margin-top: 20px;">
@@ -90,7 +90,7 @@ $(document).ready(function () {
             return;
         }
 
-        var quantity = $('#quantity').val(); 
+        var quantity = $('#quantity').val();
 
         alert('Product ID: ' + productId + ', Customer ID: ' + customerId + ', Quantity: ' + quantity);
 
@@ -101,7 +101,7 @@ $(document).ready(function () {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             data: {
-                product_id: productId, 
+                product_id: productId,
                 customer_id: customerId,
                 quantity: quantity
             },
@@ -114,3 +114,9 @@ $(document).ready(function () {
         });
     });
 });
+
+function showImage(productId, index) {
+    $(`.product-image[id^='image-${productId}-']`).hide();
+    $(`#image-${productId}-${index}`).show();
+}
+
