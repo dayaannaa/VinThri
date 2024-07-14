@@ -79,9 +79,8 @@ $(document).ready(function () {
         }
     });
 
-    $('#addToCartBtn').click(function () {
+    $(document).on('click', '#addToCartBtn', function () {
         var customerId = localStorage.getItem('customer_id');
-
         if (customerId) {
             $('#customer-id').text(customerId);
         } else {
@@ -91,8 +90,6 @@ $(document).ready(function () {
         }
 
         var quantity = $('#quantity').val();
-
-        alert('Product ID: ' + productId + ', Customer ID: ' + customerId + ', Quantity: ' + quantity);
 
         $.ajax({
             url: '/api/addtocart/' + productId,

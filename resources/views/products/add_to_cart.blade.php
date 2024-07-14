@@ -21,7 +21,7 @@
             background-color: #A9B388;
             color: #5F6F52;
         }
-        
+
         .card {
             background-color: #FEFAE0;
             border-radius: 20px;
@@ -52,6 +52,6 @@
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
         <script src="{{ asset('js/display.js') }}"></script>
     </div>
-    
+
 </body>
 </html>
