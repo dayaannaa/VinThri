@@ -7,8 +7,10 @@ use App\Models\Product;
 use App\Models\ProductSupply;
 use App\Models\Inventory;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Imports\ProductsImport;
+use Maatwebsite\Excel\Facades\Excel;
 
-class ProductController extends Controller      
+class ProductController extends Controller
 {
     public function index()
     {
@@ -171,4 +173,16 @@ class ProductController extends Controller
             return response()->json(['error' => 'Product supplies not found.'], 404);
         }
     }
+
+    public function import (Request $request)
+    {
+      $request ->validate([
+          'importFile' => ['required', 'file', 'mimes:xlsx,xls']
+      ]);
+
+      Excel::import(new ProductsImport, $request->file('importFile'));
+
+      return redirect()->back()->with('success', 'Products imported successfully');
+    }
 }
+

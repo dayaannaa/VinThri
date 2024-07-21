@@ -7,6 +7,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
+use App\Imports\AdminsImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdminController extends Controller
 {
@@ -127,8 +129,10 @@ class AdminController extends Controller
 
     public function destroy($id)
     {
+        // Find the Admin record by ID
         $admin = Admin::findOrFail($id);
 
+        // Delete associated images
         if ($admin->image) {
             $images = explode(',', $admin->image);
             foreach ($images as $imageName) {
@@ -139,8 +143,24 @@ class AdminController extends Controller
             }
         }
 
+        // Delete the Admin record
         $admin->delete();
 
+        // Find and delete the associated User record
+        $user = User::findOrFail($admin->user_id);
+        $user->delete();
+
         return response()->json(null, 204);
+    }
+
+    public function import (Request $request)
+    {
+      $request ->validate([
+          'importFile' => ['required', 'file', 'mimes:xlsx,xls']
+      ]);
+
+      Excel::import(new AdminsImport, $request->file('importFile'));
+
+      return redirect()->back()->with('success', 'Admins imported successfully');
     }
 }

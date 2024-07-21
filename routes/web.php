@@ -9,6 +9,9 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ChartsController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\SupplierController;
+
 
 
 Route::get('/', function () {
@@ -78,3 +81,7 @@ Route::view('/charts', 'charts.index');
 Route::get('/charts/sales-chart', [ChartsController::class, 'salesChart']);
 Route::get('/charts/item-chart', [ChartsController::class, 'itemChart']);
 Route::get('/charts/customer-chart', [ChartsController::class, 'customerChart']);
+
+Route::post('products', [ProductController::class, 'import']);
+Route::post('admins', [AdminController::class, 'import']);
+Route::post('suppliers', [SupplierController::class, 'import']);

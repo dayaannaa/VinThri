@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Supplier;
+use App\Imports\SuppliersImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SupplierController extends Controller
 {
@@ -103,6 +105,17 @@ class SupplierController extends Controller
         $supplier->delete();
 
         return response()->json(null, 204);
+    }
+
+    public function import (Request $request)
+    {
+      $request ->validate([
+          'importFile' => ['required', 'file', 'mimes:xlsx,xls']
+      ]);
+
+      Excel::import(new SuppliersImport, $request->file('importFile'));
+
+      return redirect()->back()->with('success', 'Admins imported successfully');
     }
 }
 
