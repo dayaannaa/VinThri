@@ -10,6 +10,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ChartsController;
 
 
 Route::post('login', [AuthController::class, 'login']);
@@ -63,4 +64,4 @@ Route::put('/orders/{orderId}/status', [OrderController::class, 'updateStatus'])
 // });
 
 
-
+Route::post('register', [AuthController::class, 'register']);

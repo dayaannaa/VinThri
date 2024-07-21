@@ -6,6 +6,10 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ChartsController;
+use Illuminate\Support\Facades\Auth;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -59,3 +63,18 @@ Route::view('/admin-orders', 'orders.admin-order');
 // Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
 
 
+
+
+// Route::middleware(['auth'])->group(function () {
+//     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+//     Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
+// });
+
+Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
+
+Route::view('/charts', 'charts.index');
+
+Route::get('/charts/sales-chart', [ChartsController::class, 'salesChart']);
+Route::get('/charts/item-chart', [ChartsController::class, 'itemChart']);
+Route::get('/charts/customer-chart', [ChartsController::class, 'customerChart']);

@@ -55,4 +55,51 @@ class AuthController extends Controller
         // Authentication failed
         return response()->json(['error' => 'Invalid credentials'], 401);
     }
+
+
+    public function register(Request $request)
+    {
+        $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'image.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'address' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8'
+        ]);
+
+        $imageNames = [];
+        if ($request->hasFile('images')) {
+            foreach ($request->file('image') as $image) {
+                $imageName = $image->getClientOriginalName();
+                $image->move(public_path('imgs'), $imageName);
+                $imageNames[] = $imageName;
+            }
+        } 
+
+        $defaultImage = 'profile1.jpg';
+
+        $user = User::create([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'type' => 1, 
+            'status' => 'active',
+            'image' => $request->hasFile('image') ? implode(',', $imageNames) : $defaultImage,
+        ]);
+
+        if ($user->type === 1) {
+            $customer = Customer::create([
+                'user_id' => $user->user_id,
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'image' => $request->hasFile('image') ? implode(',', $imageNames) : $defaultImage,
+                'address' => $request->address,
+                'email' => $request->email,
+            ]);
+        }
+
+        return response()->json(['message' => 'User registered successfully'], 201);
+    }
 }
