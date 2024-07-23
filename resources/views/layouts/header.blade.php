@@ -123,13 +123,10 @@
             <div>
                 <nav class="navbar navbar-light" style="background-color:#FEFAE0;">
                     <div class="container-fluid d-flex align-items-center ml-5">
-                        <a class="navbar-brand" style="color:#B99470; font-weight: 350; font-family: Alfa Slab One, serif; font-size: 32px;">
+                        <a class="navbar-brand" style="color:#B99470; font-weight: 350; font-family: Alfa Slab One, serif; font-size: 32px;" href="{{ url('/home') }}">
                             VINTHRI</a>
                         <div class="d-flex flex-grow-1 align-items-center">
                             <ul class="navbar-nav d-flex flex-row mb-2 mb-lg-0 ms-3">
-                                <li class="nav-item ml-4">
-                                    <a class="nav-link active" style="color:#5F6F52;" aria-current="page" href="{{ url('/home') }}">Home</a>
-                                </li>
                                 <li class="nav-item ms-3 ml-4">
                                     <a class="nav-link" style="color:#5F6F52;" href="{{ url('/products/display') }}">Shop</a>
                                 </li>
