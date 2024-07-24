@@ -163,4 +163,18 @@ class AdminController extends Controller
 
       return redirect()->back()->with('success', 'Admins imported successfully');
     }
+
+    public function admin_prof(Request $request)
+    {
+        $adminId = $request->query('admin_id'); // Get admin_id from query parameters or session
+
+        if ($adminId) {
+            // Fetch admin data and pass it to the view
+            $adminData = Admin::where('user_id', $adminId)->first();
+            return view('admins.admin-profile', compact('adminData'));
+        }
+
+        return view('admins.admin-profile')->with('error', 'Unauthorized'); // Handle unauthorized access
+    }
+
 }

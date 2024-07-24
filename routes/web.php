@@ -85,3 +85,11 @@ Route::get('/charts/customer-chart', [ChartsController::class, 'customerChart'])
 Route::post('products', [ProductController::class, 'import']);
 Route::post('admins', [AdminController::class, 'import']);
 Route::post('suppliers', [SupplierController::class, 'import']);
+
+
+Route::get('/feedbacks', [FeedbackController::class, 'index']);
+Route::view('/feedbacks', 'feedbacks.index');
+
+
+Route::view('/customer-profile', 'customers.customers-profile');
+Route::get('/admin-profile', [AdminController::class, 'admin_prof']);

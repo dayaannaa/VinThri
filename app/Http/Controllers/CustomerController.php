@@ -10,9 +10,16 @@ use Illuminate\Support\Facades\Hash;
 
 class CustomerController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json(Customer::all());
+        $customerId = $request->query('customer_id'); // Get customer_id from query parameters or session
+
+        if ($customerId) {
+            // Assuming customer_id should match with the logged-in user's ID
+            return response()->json(Customer::where('user_id', $customerId)->get());
+        }
+
+        return response()->json(['error' => 'Unauthorized'], 403); // Handle unauthorized access
     }
 
     public function show($id)

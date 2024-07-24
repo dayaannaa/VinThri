@@ -11,6 +11,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ChartsController;
+use App\Http\Controllers\FeedbackController;
 
 
 Route::post('login', [AuthController::class, 'login']);
@@ -65,3 +66,7 @@ Route::put('/orders/{orderId}/status', [OrderController::class, 'updateStatus'])
 
 
 Route::post('register', [AuthController::class, 'register']);
+
+Route::apiResource('feedbacks', FeedbackController::class);
+
+Route::get('/api/admins', [AdminController::class, 'admin_prof']);
