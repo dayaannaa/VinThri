@@ -15,7 +15,7 @@ $(document).ready(function () {
                     if (!data) return '';
                     var images = data.split(',');
                     return images.map(function (img) {
-                        return `<img src="/imgs/${img}" class="mask mask-squircle" style="max-width: 100px; max-height: 100px;">`;
+                        return `<img src="/imgs/${img}" class="mask mask-hexagon-2" style="max-width: 100px; max-height: 100px;">`;
                     }).join(' ');
                 },
                 defaultContent: '',

@@ -24,7 +24,7 @@
             <ul class="menu menu-horizontal rounded-box"
                 style="color: #5F6F52; font-weight: 300; font-family: Poppins, sans-serif; font-size: 15px;">
                 <li>
-                    <a href="{{ url('/admins') }}">
+                    <a href="{{ url('/admins') }} " class="text-decoration-none">
                         <svg class="h-8 w-8" style="color: #5F6F52"; fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -34,7 +34,7 @@
                     </a>
                 </li>
                 <li>
-                    <a>
+                    <a href="{{ url('/products') }}" class="text-decoration-none">
                         <svg class="h-8 w-8" style="color: #5F6F52"; fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -44,7 +44,7 @@
                     </a>
                 </li>
                 <li>
-                    <a>
+                    <a class="text-decoration-none">
                         <svg class="h-8 w-8" style="color: #5F6F52"; fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -54,7 +54,7 @@
                     </a>
                 </li>
                 <li>
-                    <a>
+                    <a class="text-decoration-none">
                         <svg class="h-8 w-8" style="color: #5F6F52"; fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -64,7 +64,7 @@
                     </a>
                 </li>
                 <li>
-                    <a>
+                    <a class="text-decoration-none">
                         <svg class="h-8 w-8" style="color: #5F6F52"; fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -74,7 +74,7 @@
                     </a>
                 </li>
                 <li>
-                    <a>
+                    <a class="text-decoration-none">
                         <svg class="h-8 w-8" style="color: #5F6F52"; fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
