@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
     var table = $('#adminsTable').DataTable({
         ajax: {
             url: '/api/admins',
@@ -6,27 +6,27 @@ $(document).ready(function() {
         },
         columns: [
             { data: 'admin_id' },
+            {
+                data: 'image',
+                render: function (data) {
+                    if (!data) return '';
+                    var images = data.split(',');
+                    return images.map(function (img) {
+                        return `<img src="/imgs/${img}" class="mask mask-squircle" style="max-width: 100px; max-height: 100px;">`;
+                    }).join(' ');
+                },
+                defaultContent: ''
+            },
             { data: 'first_name' },
             { data: 'last_name' },
             { data: 'address' },
             { data: 'email' },
             {
-                data: 'image',
-                render: function(data) {
-                    if (!data) return '';
-                    var images = data.split(',');
-                    return images.map(function(img) {
-                        return `<img src="/imgs/${img}" class="img-thumbnail" style="max-width: 100px; max-height: 100px;">`;
-                    }).join(' ');
-                },
-                defaultContent: ''
-            },
-            {
                 // Render edit and delete buttons
-                render: function(data, type, row) {
+                render: function (data, type, row) {
                     return `
-                        <button class="btn btn-sm btn-primary editAdmin" data-id="${row.admin_id}">Edit</button>
-                        <button class="btn btn-sm btn-danger deleteAdmin" data-id="${row.admin_id}">Delete</button>
+                        <button class="btn btn-sm btn-accent editAdmin" data-id="${row.admin_id}">Edit</button>
+                        <button class="btn btn-sm btn-error deleteAdmin" data-id="${row.admin_id}">Delete</button>
                     `;
                 }
             }
@@ -35,14 +35,14 @@ $(document).ready(function() {
         dataType: 'json'
     });
 
-    $('#createAdmin').on('click', function() {
+    $('#createAdmin').on('click', function () {
         $('#adminModalLabel').text('Create Admin');
         $('#adminForm')[0].reset();
         $('#adminId').val(''); // Corrected the ID here
         $('#adminModal').modal('show');
     });
 
-    $('#adminForm').on('submit', function(event) {
+    $('#adminForm').on('submit', function (event) {
         event.preventDefault();
         var id = $('#adminId').val();
         var url = id ? `/api/admins/${id}` : '/api/admins';
@@ -59,12 +59,12 @@ $(document).ready(function() {
             data: formData,
             processData: false,
             contentType: false,
-            success: function(response) {
+            success: function (response) {
                 $('#adminModal').modal('hide');
                 table.ajax.reload();
                 alert(adminId ? 'Admin updated successfully!' : 'Admin created successfully!');
             },
-            error: function(xhr, status, error) {
+            error: function (xhr, status, error) {
                 var errorMessage = 'Error: Failed to process the request.';
                 if (xhr.status === 422) { // Handle validation errors
                     var errors = xhr.responseJSON.errors;
@@ -80,38 +80,42 @@ $(document).ready(function() {
         });
     });
 
-    $('#adminsTable').on('click', '.editAdmin', function() {
+    $('#adminsTable').on('click', '.editAdmin', function () {
         var adminId = $(this).data('id');
-        $.get(`/api/admins/${adminId}`, function(admin) {
+        $.get(`/api/admins/${adminId}`, function (admin) {
             $('#adminModalLabel').text('Edit Admin');
             $('#first_name').val(admin.first_name);
             $('#last_name').val(admin.last_name);
             $('#address').val(admin.address);
             $('#email').val(admin.email);
             $('#adminId').val(admin.admin_id);
-             // Display password length (hashed password length)
-        var passwordLength = admin.password.length;
-        $('#password').val('*'.repeat(passwordLength)); // Mask the password
+            // Display password length (hashed password length)
+            var passwordLength = admin.password.length;
+            $('#password').val('*'.repeat(passwordLength)); // Mask the password
 
             $('#adminModal').modal('show');
         });
     });
 
-    $('#adminsTable').on('click', '.deleteAdmin', function() {
+    $('#adminsTable').on('click', '.deleteAdmin', function () {
         if (confirm('Are you sure you want to delete this admin?')) {
             var adminId = $(this).data('id');
             $.ajax({
                 url: `/api/admins/${adminId}`,
                 type: 'DELETE',
                 dataType: 'json', // Ensure dataType is 'json'
-                success: function(response) {
+                success: function (response) {
                     table.ajax.reload();
                     alert('Admin deleted successfully!');
                 },
-                error: function(response) {
+                error: function (response) {
                     alert('Error deleting admin!');
                 }
             });
         }
     });
 });
+
+function closeModal() {
+    document.getElementById('adminModal').close();
+}
