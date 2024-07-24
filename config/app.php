@@ -123,6 +123,10 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'aliases' => [
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+    ],
+
     'providers' => [
     // other providers
     Laravel\Sanctum\SanctumServiceProvider::class,
@@ -150,4 +154,7 @@ return [
     Illuminate\View\ViewServiceProvider::class,
     Maatwebsite\Excel\ExcelServiceProvider::class,
 ],
+
+
 ];
+
