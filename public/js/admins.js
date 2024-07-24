@@ -25,7 +25,7 @@ $(document).ready(function () {
                 // Render edit and delete buttons
                 render: function (data, type, row) {
                     return `
-                        <button class="btn btn-sm btn-accent editAdmin" data-id="${row.admin_id}">Edit</button>
+                        <button class="btn btn-sm btn-accent editAdmin" data-id="${row.admin_id}" onclick="adminModal.showModal()">Edit</button>
                         <button class="btn btn-sm btn-error deleteAdmin" data-id="${row.admin_id}">Delete</button>
                     `;
                 }
