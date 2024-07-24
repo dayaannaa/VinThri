@@ -9,11 +9,20 @@
         rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
 
-    <h2 class="display-3 fw-bolder mb-6" style="text-align: center; font-family: 'Alfa Slab One', serif; color: #5F6F52;">
+    <h2 class="display-3 fw-bolder my-5" style="text-align: center; font-family: 'Alfa Slab One', serif; color: #5F6F52;">
         System Admins</h2>
-    <button id="createAdmin" class="btn d-flex justify-content-center align-items-center" onclick="adminModal.showModal()"
-        style="background: #5F6F52; font-family: 'Poppins', sans-serif; color:#FEFAE0; margin-bottom:2%; text-align:center">Create
-        Admin</button>
+
+    <div class="d-flex justify-content-center align-items-center">
+        <button id="createAdmin" class="btn" onclick="adminModal.showModal()"
+            style="background: #5F6F52; font-family: 'Poppins', sans-serif; color:#FEFAE0; margin-right:1%; text-align:center">
+            Create Admin
+        </button>
+        <button id="importAdmin" class="btn" onclick="importModal.showModal()"
+            style="background: #5F6F52; font-family: 'Poppins', sans-serif; color:#FEFAE0; text-align:center">
+            Import Admin
+        </button>
+    </div>
+
     <div class="overflow">
         <table class="table pt-3" id="adminsTable">
             <thead style="background: #5F6F52; color:#FEFAE0">
@@ -32,6 +41,9 @@
 
         <dialog id="adminModal" class="modal">
             <div class="modal-box" style="background:#5F6F52;">
+                <form method="dialog">
+                    <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" style="color: #FEFAE0">✕</button>
+                </form>
                 <div class="modal-body">
                     <p class="modal-title"
                         style="text-align:center; font-family: 'Alfa Slab One', serif; color:#FEFAE0; font-size:24px; margin-bottom:3%"
@@ -72,16 +84,30 @@
                             <input type="password" class="form-control" id="password" name="password">
                         </div>
                         <input type="hidden" id="adminId">
-                        <div class="row pt-2">
-                            <div class="col-8">
-                                <button type="submit" class="btn btn-block"
-                                    style="font-family: 'Poppins', serif; color:#FEFAE0; background:#B99470;">Save</button>
-                            </div>
-                            <div class="col-4">
-                                <button type="button" class="btn btn-block"
-                                    style="font-family: 'Poppins', serif; color:#B99470; background:#FEFAE0;"
-                                    onclick="closeModal()">Close</button>
-                            </div>
+                        <button type="submit" class="btn btn-block"
+                            style="font-family: 'Poppins', serif; color:#FEFAE0; background:#B99470; margin-top:5%">Save</button>
+
+                    </form>
+                </div>
+            </div>
+        </dialog>
+
+        <dialog id="importModal" class="modal">
+            <div class="modal-box" style="background:#5F6F52;">
+                <form method="dialog">
+                    <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" style="color: #FEFAE0">✕</button>
+                </form>
+                <div class="modal-body">
+                    <p class="modal-title pb-4"
+                        style="text-align:center; font-family: 'Alfa Slab One', serif; color:#FEFAE0; font-size:24px; margin-bottom:3%"
+                        id="adminModalLabel">Import Admin</p>
+                    <form action = "{{ url('admins') }}" method = "POST" enctype = "multipart/form-data">
+                        @csrf
+                        <div class="d-flex justify-content-center align-items-center">
+                            <input type="file" class="file-input w-full max-w-xs"
+                                name = "importFile" style="color:#5F6F52; background:#FEFAE0; font-family: 'Poppins', serif" />
+                            <button type = "submit" class = "btn ml-3"
+                                style="font-family: 'Poppins', serif; color:#FEFAE0; background:#B99470;">Import </button>
                         </div>
                     </form>
                 </div>
@@ -89,17 +115,6 @@
         </dialog>
 
 
-        <div class ="card-body">
-            <form action = "{{ url('admins') }}" method = "POST" enctype = "multipart/form-data">
-                @csrf
-
-                <div class = "input-group">
-                    <input type = "file" name = "importFile" class = "form-control" />
-                    <button type = "submit" class = "btn"
-                        style="font-family: 'Poppins', serif; color:#FEFAE0; background:#5F6F52;"> Import </button>
-                </div>
-            </form>
-        </div>
     </div>
 
 @endsection
