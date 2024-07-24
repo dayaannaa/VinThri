@@ -5,7 +5,7 @@
 @section('content')
     <h2>Products Management</h2>
     <button id="createProduct" class="btn btn-primary mb-3">Create Product</button>
-    <table class="table table-bordered" id="productsTable">
+    <table class="table table-bordered" id="productsTable" style="background-color: #FEFAE0;">
         <thead>
             <tr>
                 <th>ID</th>

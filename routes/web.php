@@ -11,6 +11,7 @@ use App\Http\Controllers\ChartsController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\AdminHomeController;
 
 
 
@@ -33,6 +34,9 @@ Route::view('/customers', 'customers.index');
 Route::view('/login', 'auth.login');
 
 Route::view('/carts', 'carts.index');
+
+Route::view('/adminhome', 'admins.home');
+Route::view('/adminhome', 'admins.home')->name('admin.home');
 
 // Route::view('/orders', 'orders.order-details');
 

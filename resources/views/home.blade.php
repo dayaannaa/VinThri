@@ -17,7 +17,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
-
+</head>
 <body style="overflow-x: hidden; background-color: #FEFAE0;">
     @include('layouts.header')
     {{-- <div class="row gx-5 align-items-center">
@@ -63,20 +63,16 @@
         </div>
     </div>
 </body>
-<div
+<!-- <div
     style="background-color: #526143; border-radius: 10px; padding: 30px; display: flex; justify-content: center; align-items: center; margin: 0 15px; position: relative; top: -1px; z-index: 1;">
     <p style="font-family: 'Alfa Slab One', serif; color: #FEFAE0; font-size: 24px; margin: 0;">STAY UPTO DATE ABOUT OUR
         LATEST OFFERS</p>
-</div>
+</div> -->
 <footer
-    style="height: 120px; width: 100%; background-color: rgba(169, 179, 136, 0.5); margin-top: -50px; padding-top: 60px; position: relative; z-index: 0;">
-    <div
-        style="width: auto; height: 1px; background-color: rgba(185, 148, 112, 0.3); margin-left: 60px; margin-right: 60px; margin-top: 20px;">
-    </div>
-    <div
-        style="text-align: left; padding: 10px; font-family: 'Poppins', sans-serif; color: #5F6F52; font-size: 10px; margin-left: 10px; margin-top: 5px;">
+    style="height: 70px; width: 125%; background-color: rgba(169, 179, 136, 0.5); margin-top: 95px; padding-top: 30px; position: relative; z-index: 0;">
+    <p style="text-align: left;  font-family: 'Poppins', sans-serif; color: #5F6F52; font-size: 14px; margin-left: 50px; margin-bottom: 30px;">
         VintThri © 2024, All Rights Reserved
-    </div>
+    </p>
 </footer>
 
 </html>
