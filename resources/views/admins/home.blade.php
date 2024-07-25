@@ -9,7 +9,5 @@
 
 </head>
 <body style="background-color: #FEFAE0;">
-
-
 </body>
 </html>

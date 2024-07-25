@@ -13,11 +13,11 @@
 
 <body style="background-color: #FEFAE0; height: 950px;">
 <div class="navbar" style="background-color: #FEFAE0;">
-    <a class="btn btn-ghost text-xl" style="color: #B99470; font-family: Alfa Slab One, serif; font-weight: 300; font-size: 20px;" href="{{ url('/adminhome') }}">VinThri</a>
+    <a class="btn btn-ghost text-xl" style="color: #B99470; font-family: Alfa Slab One, serif; font-weight: 300; font-size: 32px;" href="{{ url('/adminhome') }}">VINTHRI</a>
   <div class="flex-1 justify-center">
     <ul class="menu menu-horizontal rounded-box" style="background-color: #FEFAE0; color: #5F6F52; font-weight: 300; font-family: Poppins, sans-serif; font-size: 15px;">
         <li>
-            <a>
+            <a class="tooltip tooltip-bottom" data-tip="Admins">
             <svg
             class="h-8 w-8" 
             style="color: #5F6F52";
