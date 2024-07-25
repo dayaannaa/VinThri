@@ -6,16 +6,16 @@ $(document).ready(function() {
         },
         columns: [
             { data: 'product_id' },
-            { data: 'name' },
             {
                 data: 'images',
                 render: function(data) {
                     if (!data) return '';
                     return data.split(',').map(image =>
-                        `<img src="/imgs/${image}" class="img-thumbnail" style="max-width: 100px; max-height: 100px; margin-right: 5px;">`
+                        `<img src="/imgs/${image}" class="img-thumbnail mask mask-hexagon-2" style="max-width: 100px; max-height: 100px; margin-right: 5px;">`
                     ).join('');
                 }
             },
+            { data: 'name' },
             { data: 'price' },
             {
                 data: 'productsupplies',
@@ -56,8 +56,8 @@ $(document).ready(function() {
             {
                 data: 'product_id',
                 render: function(data) {
-                    return `<button class="btn btn-info btn-sm edit" data-id="${data}">Edit</button>
-                            <button class="btn btn-danger btn-sm delete" data-id="${data}">Delete</button>`;
+                    return `<button class="btn btn-accent btn-sm edit" data-id="${data}" onclick="productModal.showModal()">Edit</button>
+                            <button class="btn btn-error btn-sm delete" data-id="${data}">Delete</button>`;
                 }
             }
         ]

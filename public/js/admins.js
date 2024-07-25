@@ -5,30 +5,46 @@ $(document).ready(function () {
             dataSrc: ''
         },
         columns: [
-            { data: 'admin_id' },
+            {
+                data: 'admin_id',
+                className: 'td'
+            },
             {
                 data: 'image',
                 render: function (data) {
                     if (!data) return '';
                     var images = data.split(',');
                     return images.map(function (img) {
-                        return `<img src="/imgs/${img}" class="mask mask-squircle" style="max-width: 100px; max-height: 100px;">`;
+                        return `<img src="/imgs/${img}" class="mask mask-hexagon-2" style="max-width: 100px; max-height: 100px;">`;
                     }).join(' ');
                 },
-                defaultContent: ''
+                defaultContent: '',
+                className: 'td'
             },
-            { data: 'first_name' },
-            { data: 'last_name' },
-            { data: 'address' },
-            { data: 'email' },
             {
-                // Render edit and delete buttons
+                data: 'first_name',
+                className: 'td'
+            },
+            {
+                data: 'last_name',
+                className: 'td'
+            },
+            {
+                data: 'address',
+                className: 'td'
+            },
+            {
+                data: 'email',
+                className: 'td'
+            },
+            {
                 render: function (data, type, row) {
                     return `
                         <button class="btn btn-sm btn-accent editAdmin" data-id="${row.admin_id}" onclick="adminModal.showModal()">Edit</button>
                         <button class="btn btn-sm btn-error deleteAdmin" data-id="${row.admin_id}">Delete</button>
                     `;
-                }
+                },
+                className: 'td'
             }
         ],
         // Specify datatype as 'json'
