@@ -3,6 +3,8 @@
 @section('title', 'Product Management')
 @include('admins.home')
 @section('content')
+<title>Product Management</title>
+
     <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet">
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
@@ -148,7 +150,7 @@
             </div>
         </dialog>
 
-        {{-- <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel"
+        <!-- <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel"
             aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -206,7 +208,7 @@
                     </div>
                 </div>
             </div>
-        </div> --}}
+        </div>  -->
 
         <!-- View Supplies Modal -->
         <div class="modal fade" id="suppliesModal" tabindex="-1" aria-labelledby="suppliesModalLabel"
@@ -232,14 +234,14 @@
             </div>
         </div>
 
-        {{-- <form action = "{{ url('products') }}" method = "POST" enctype = "multipart/form-data">
+         <!-- <form action = "{{ url('products') }}" method = "POST" enctype = "multipart/form-data">
             @csrf
 
             <div class = "input-group">
                 <input type = "file" name = "importFile" class = "form-control" />
                 <button type = "submit" class = "btn btn-primary"> Import </button>
             </div>
-        </form> --}}
+        </form>  -->
 
     @endsection
 

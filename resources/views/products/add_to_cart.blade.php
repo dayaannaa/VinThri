@@ -38,19 +38,11 @@
     @include('layouts.header')
     <div style="width: auto; height: 1px; background-color: rgba(185, 148, 112, 0.3); margin-left: 60px; margin-right: 60px;"> </div>
     <h1 style="margin-left: 60px; margin-top: 30px; margin-bottom: 20px; font-family: Poppins, sans-serif; color: #5F6F52; font-size: 14px;">Home > Shop > Shirt</h1> <!-- temporary -->
-        <div id="product-details-container" class="row"></div>
+        <div id="product-details-container" class="row" style= "margin-top: 50px;"></div>
             <input type="hidden" id="customer_id">
             <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
             <script src="{{ asset('js/addtocarts.js') }}"></script>
         </div>
-            <p style="font-family: Alfa Slab One, serif; font-weight: 400; font-size: 25px;color: #5F6F52; text-align: center; margin-top: 60px;">
-            You might also like
-            </p>
-            <div class="container" style="margin-left: 47px; margin-top: 30px;">
-                <div id="products-container" class="row"></div>
-            </div>
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-        <script src="{{ asset('js/display.js') }}"></script>
     </div>
 
 </body>

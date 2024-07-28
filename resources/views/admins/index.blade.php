@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @extends('layouts.datatables-style')
-@section('title', 'Admin Management')
+<!-- @section('title', 'Admin Management') -->
 @include('admins.home')
 @section('content')
     <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet">

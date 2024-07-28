@@ -15,6 +15,7 @@ return new class extends Migration
             $table->bigIncrements('feedback_id');
             $table->string('date');
             $table->text('images')->nullable();
+            $table->text('description');
             $table->timestamps();
             $table->unsignedBigInteger('customer_id');
             $table->unsignedBigInteger('order_item_id');

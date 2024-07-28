@@ -37,7 +37,7 @@
             </div>
         </div>
         <div class="col-xxl-7">
-            <img src="http://127.0.0.1:8000/storage/images/bag1.jpg"  alt="..." width="100px" height="100px">
+            <img src="http://127.0.0.1:8000/storage/images/hoodie14.png"  alt="..." width="100px" height="100px">
         </div>
     </div> --}}
     <div class="row gx-5 align-items-center ml-2">
@@ -54,12 +54,11 @@
                     </p>
                 </div>
                 <a href="{{ url('/products/display') }}" class="button mb-20">Thrift Now!</a>
-
             </div>
         </div>
         <div class="col-xxl-7">
-            <img src="http://127.0.0.1:8000/storage/images/bag1.jpg" alt="..." width="500px" height="500px"
-                style="margin-left:50%">
+            <img src="http://127.0.0.1:8000/storage/images/hoodie14.png" alt="..." width="700px" height="700px"
+                style="margin-left:30%">
         </div>
     </div>
 </body>

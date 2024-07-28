@@ -4,8 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin</title>
-
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet">
     <link
@@ -14,111 +12,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<<<<<<< HEAD
-<body style="background-color: #FEFAE0; height: 950px;">
-<div class="navbar" style="background-color: #FEFAE0;">
-    <a class="btn btn-ghost text-xl" style="color: #B99470; font-family: Alfa Slab One, serif; font-weight: 300; font-size: 32px;" href="{{ url('/adminhome') }}">VINTHRI</a>
-  <div class="flex-1 justify-center">
-    <ul class="menu menu-horizontal rounded-box" style="background-color: #FEFAE0; color: #5F6F52; font-weight: 300; font-family: Poppins, sans-serif; font-size: 15px;">
-        <li>
-            <a class="tooltip tooltip-bottom" data-tip="Admins">
-            <svg
-            class="h-8 w-8" 
-            style="color: #5F6F52";
-            fill="none" viewBox="0 0 24 24" 
-            stroke="currentColor">
-                <path 
-                stroke-linecap="round" 
-                stroke-linejoin="round" 
-                stroke-width="2" 
-                d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
-            </svg>
-            </a>
-        </li>
-        <li>
-            <a class="tooltip tooltip-bottom" data-tip="Products">
-            <svg
-            class="h-8 w-8" 
-            style="color: #5F6F52";
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor">
-                <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2" 
-                d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z"/>
-            </svg>
-            </a>
-        </li>
-        <li>
-            <a class="tooltip tooltip-bottom" data-tip="Suppliers">
-            <svg 
-            class="h-8 w-8"
-            style="color: #5F6F52";
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor">
-                <path
-                stroke-linecap="round"
-                stroke-linejoin="round" 
-                stroke-width="2"
-                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
-            </svg>
-            </a>
-        </li>
-        <li>
-            <a class="tooltip tooltip-bottom" data-tip="Categories">
-            <svg 
-            class="h-8 w-8"  
-            style="color: #5F6F52";
-            fill="none" 
-            viewBox="0 0 24 24" 
-            stroke="currentColor">
-                <path 
-                stroke-linecap="round" 
-                stroke-linejoin="round" 
-                stroke-width="2" 
-                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
-            </svg>
-            </a>
-        </li>
-        <li>
-            <a class="tooltip tooltip-bottom" data-tip="Feedbacks">
-            <svg 
-            class="h-8 w-8"  
-            style="color: #5F6F52";
-            fill="none" 
-            viewBox="0 0 24 24" 
-            stroke="currentColor">
-                <path 
-                stroke-linecap="round" 
-                stroke-linejoin="round" 
-                stroke-width="2" 
-                d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"/>
-            </svg>
-            </a>
-        </li>
-        <li>
-            <a class="tooltip tooltip-bottom" data-tip="Users">
-            <svg 
-            class="h-8 w-8"
-            style="color: #5F6F52";
-            fill="none" 
-            viewBox="0 0 24 24" 
-            stroke="currentColor">
-                <path
-                stroke-linecap="round" 
-                stroke-linejoin="round" 
-                stroke-width="2" 
-                d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
-            </a>
-        </li>
-    </ul>
-  </div>
-=======
->>>>>>> bb1d93b29b062ce5b3850aada2bd96f26c6514e3
 
 <body style="background-color: #FEFAE0; height: 950px;">
     <div class="navbar" style="background-color: #FEFAE0;">
@@ -149,7 +42,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="text-decoration-none">
+                    <a  href="{{ url('/suppliers') }}" class="text-decoration-none">
                         <svg class="h-8 w-8" style="color: #5F6F52"; fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -159,7 +52,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="text-decoration-none">
+                    <a  href="{{ url('/categories') }}" class="text-decoration-none">
                         <svg class="h-8 w-8" style="color: #5F6F52"; fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -169,17 +62,15 @@
                     </a>
                 </li>
                 <li>
-                    <a class="text-decoration-none">
-                        <svg class="h-8 w-8" style="color: #5F6F52"; fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
-                        </svg>
-                        Feedbacks
+                    <a  href="{{ url('/admin-orders') }}" class="text-decoration-none">
+                    <svg class="h-8 w-8" style="color: #5F6F52"; viewBox="0 0 24 24"  fill="none" 
+                        stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">
+                            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />  <line x1="3" y1="6" x2="21" y2="6" />  <path d="M16 10a4 4 0 0 1-8 0" /></svg>
+                        Orders
                     </a>
                 </li>
                 <li>
-                    <a class="text-decoration-none">
+                    <a  href="{{ url('/users') }}" class="text-decoration-none">
                         <svg class="h-8 w-8" style="color: #5F6F52"; fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -234,12 +125,12 @@
                     class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
                     style="color: #5F6F52; background-color: rgba(169, 179, 136, 0.3);">
                     <li>
-                        <a class="justify-between"
+                        <a  href="{{ url('/admin-profile') }}" class="justify-between"
                             style="color: #5F6F52; font-family: Poppins, sans-serif; font weight: 300;">
                             Profile
                         </a>
                     </li>
-                    <li><a style="color: #5F6F52; font-family: Poppins, sans-serif; font weight: 300;">Settings</a>
+                    <!-- <li><a style="color: #5F6F52; font-family: Poppins, sans-serif; font weight: 300;">Settings</a> -->
                     </li>
                     <li><a style="color: #5F6F52; font-family: Poppins, sans-serif; font weight: 300;">Logout</a></li>
                 </ul>

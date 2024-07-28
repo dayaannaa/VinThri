@@ -5,7 +5,7 @@
 //         dataType: 'json',
 //         success: function(data) {
 //             var productsContainer = $('#products-container');
-//             data.forEach(function(product) {
+//             data.forEach(function(product) {x
 //                 var images = product.images.split(',');
 //                 var imagesHtml = '';
 //                 var radioButtonsHtml = '';
@@ -54,36 +54,58 @@
 
 
 $(document).ready(function() {
-    $.ajax({
-        url: '/api/products',
-        method: 'GET',
-        dataType: 'json',
-        success: function(data) {
-            var productsContainer = $('#products-container');
-            data.forEach(function(product) {
-                var images = product.images.split(',');
-                var productHtml = `
-                    <div class="col-" style="margin-right: 30px;">
-                        <div class="card w-56 mb-4" style="background-color: #FEFAE0; border-radius: 5px; border-color: transparent;">      
-                            <figure>
-                                <a href="/products/add_to_cart/${product.product_id}">
-                                    <img src="/imgs/${images[0].trim()}" alt="${product.name}" data-product-id="${product.product_id}" style="border-radius: 5px 5px 0px 0px; height: 224px;">
-                                </a>
-                            </figure>
-                            <div class="card-body" style="padding: 0px;">
-                                <h2 class="card-title" style="color: #B99470; font-weight: 600; font-family: Poppins, sans-serif; font-size: 14px; margin-top: 10px; margin-bottom: 2px;">${product.name}</h2>
-                                <p style="color: #A9B388; font-family: Poppins, sans-serif; font-size: 16px; font-weight: 600;"><strong>&#8369;</strong> ${product.price}</p>
+    let page = 1; // Track the current page
+
+    function loadProducts() {
+        $.ajax({
+            url: '/api/products?page=' + page,
+            method: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                if (data.length === 0) {
+                    $(window).off('scroll'); // No more products to load, unbind scroll event
+                    return;
+                }
+
+                var productsContainer = $('#products-container');    
+
+                data.forEach(function(product) {
+                    var images = product.images.split(',');
+                    var productHtml = `
+                        <div class="col-md-4" style="max-width: 224px; margin-right: 10px;">
+                            <div class="card w-56 mb-4" style="background-color: #FEFAE0; border-radius: 10px; border-color: transparent;">      
+                                <figure>
+                                    <a href="/products/add_to_cart/${product.product_id}">
+                                        <img src="/imgs/${images[0].trim()}" alt="${product.name}" data-product-id="${product.product_id}" style="border-radius: 10px 10px 10px 10px; height: 224px; width: 224px;">
+                                    </a>
+                                </figure>
+                                <div class="card-body" style="padding: 0px;">
+                                    <h2 class="card-title" style="color: #B99470; font-weight: 600; font-family: Poppins, sans-serif; font-size: 14px; margin-top: 7px; margin-bottom: 0px;">${product.name}</h2>
+                                    <p style="color: #5F6F52; font-family: Poppins, sans-serif; margin-top: 1px; font-weight: 700; font-size: 16px;"><strong>&#8369;</strong> ${product.price}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                `;
-                productsContainer.append(productHtml);
-            });
-        },
-        error: function(error) {
-            console.log('Error fetching products:', error);
+                    `;
+                    productsContainer.append(productHtml);
+                });
+                page++; // Increment the page number for the next request
+            },
+            error: function(error) {
+                console.log('Error fetching products:', error);
+            }
+        });
+    }
+
+    // Initial load
+    loadProducts();
+
+    // Infinite scroll event
+    $(window).scroll(function() {
+        if ($(window).scrollTop() + $(window).height() >= $(document).height() - 100) {
+            loadProducts();
         }
     });
 });
+
 
 

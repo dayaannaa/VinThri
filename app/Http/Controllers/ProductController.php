@@ -184,5 +184,25 @@ class ProductController extends Controller
 
       return redirect()->back()->with('success', 'Products imported successfully');
     }
-}
 
+
+    public function shop(Request $request)
+        {
+            $products = Product::paginate(10);
+
+            if ($request->ajax()) {
+                return response()->json([
+                    'data' => $products->items(),
+                    'last_page' => $products->lastPage(),
+                ]);
+            }
+
+            return view('products.products_display', compact('products'));
+        }
+
+    public function getProducts(Request $request)
+    {
+        $products = Product::paginate(10); // Adjust the number per page as needed
+        return response()->json($products);
+    }
+}

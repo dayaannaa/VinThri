@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Customer Management')
+@section('title', 'Admin Profile')
 
 @section('content')
     <h2>Admin Profile</h2>

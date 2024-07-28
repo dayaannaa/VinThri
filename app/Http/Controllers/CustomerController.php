@@ -12,15 +12,17 @@ class CustomerController extends Controller
 {
     public function index(Request $request)
     {
-        $customerId = $request->query('customer_id'); // Get customer_id from query parameters or session
-
-        if ($customerId) {
-            // Assuming customer_id should match with the logged-in user's ID
-            return response()->json(Customer::where('user_id', $customerId)->get());
+            $customerId = $request->query('customer_id');
+            if ($customerId) {
+                $customers = Customer::where('customer_id', $customerId)->get();
+            } else {
+                $customers = Customer::all();
+            }
+    
+            return response()->json($customers);
         }
-
-        return response()->json(['error' => 'Unauthorized'], 403); // Handle unauthorized access
-    }
+    
+    
 
     public function show($id)
     {

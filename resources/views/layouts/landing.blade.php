@@ -112,6 +112,19 @@
             .button:hover {
                 background-color: #FEFAE0;
             }
+
+            .btn {
+                background-color: #5F6F52;
+                color: #FEFAE0;
+                font-family: 'Poppins', sans-serif;
+                border-color: #5F6F52;
+            }
+
+            .btn:hover {
+                background-color: #FEFAE0;
+                color: #5F6F52;
+                border-color: #B99470;
+            }
             /* Ensure the search icon library is loaded */
             @import url('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css');
             @import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
@@ -128,13 +141,10 @@
                         <div class="d-flex flex-grow-1 align-items-center">
                             <ul class="navbar-nav d-flex flex-row mb-2 mb-lg-0 ms-3">
                                 <li class="nav-item ms-3 ml-4">
-                                    <a class="nav-link" style="color:#5F6F52;" href="{{ url('/home') }}">Home</a>
-                                </li>
-                                <li class="nav-item ms-3 ml-4">
                                     <a class="nav-link" style="color:#5F6F52;" href="{{ url('/products/display') }}">Shop</a>
                                 </li>
                                 <li class="nav-item ms-3 ml-4">
-                                    <a class="nav-link" style="color:#5F6F52;" href="{{ url('/feedbacks') }}">Reviews
+                                    <a class="nav-link" style="color:#5F6F52;" href="#">Reviews
                                     </a>
                                 </li>
                                 <li class="nav-item ms-3 ml-4">
@@ -147,17 +157,20 @@
                             </div>
                             <ul class="navbar-nav d-flex flex-row ms-auto mb-2 mb-lg-0">
                                 <li class="nav-item ms-3">
-                                    <a class="nav-link" href="{{ url('/carts') }}"><i class="bi bi-cart cart-icon mr-3 position-relative" style="color:#5F6F52; font-weight: bold; font-size: 18px"></i></a>
-                                </li>
-                                <li class="nav-item ms-3">
-                                    <a class="nav-link profile-icon mr-3 position-relative" href="{{ url('/customer-profile') }}" style="color:#5F6F52;">
-                                        <img src=".../public/imgs/1.png" alt="Profile">
-                                    </a>
+                                <button class="btn" id="login"> 
+                                    Sign In
+                                </button>                                
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </nav>
             </div>
+            <script>
+            document.getElementById("login").onclick = function () { 
+                location.href = "{{ url('/login') }}"; 
+            }; 
+        </script>
+
         </body>
     </html>

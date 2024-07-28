@@ -6,23 +6,24 @@ $(document).ready(function() {
         },
         columns: [
             { data: 'supplier_id' },
-            { data: 'first_name' },
-            { data: 'last_name' },
-            { data: 'address' },
             {
                 data: 'image',
                 render: function(data) {
                     if (!data) return '';
                     return data.split(',').map(image =>
-                        `<img src="/imgs/${image}" class="img-thumbnail" style="max-width: 100px; max-height: 100px; margin-right: 5px;">`
+                        `<img src="/imgs/${image}" class="mask mask-squircle w-24" style="max-width: 100px; max-height: 100px; margin-right: 5px;">`
                     ).join('');
                 }
             },
+            { data: 'first_name' },
+            { data: 'last_name' },
+            { data: 'address' },
+            
             {
                 data: 'supplier_id',
                 render: function(data) {
-                    return `<button class="btn btn-info btn-sm edit" data-id="${data}">Edit</button>
-                            <button class="btn btn-danger btn-sm delete" data-id="${data}">Delete</button>`;
+                    return `<button class="btn btn-accent btn-sm edit" data-id="${data}" onclick="supplierModal.showModal()">Edit</button>
+                            <button class="btn btn-error btn-sm delete" data-id="${data}">Delete</button>`;
                 }
             }
         ]
@@ -34,6 +35,7 @@ $(document).ready(function() {
         $('#supplier_id').val('');
         $('#supplierModal').modal('show');
     });
+
 
     $('#supplierForm').submit(function(e) {
         e.preventDefault();

@@ -25,18 +25,24 @@
         }
     </style>
 <body>
-    @include('layouts.header')
+@include('layouts.header')
 
-    <div style="width: auto; height: 1px; background-color: rgba(185, 148, 112, 0.3); margin-left: 60px; margin-right: 60px;"> </div>
-    <h1 style="margin-left: 60px; margin-top: 30px; margin-bottom: 20px; font-family: Poppins, sans-serif; color: #5F6F52; font-size: 14px;">Home > Shop</h1> <!-- temporary -->
-    <p style="font-family: Poppins, sans-serif; font-weight: 700; font-size: 25px; margin-left: 60px; color: #5F6F52;">
-        Products 
-    </p>
-    <div class="container" style="margin-left: 47px; margin-top: 20px;">
-        <div id="products-container" class="row" style="margin-left: 2px;"></div>
-    </div>
+<div style="width: auto; height: 1px; background-color: rgba(185, 148, 112, 0.3); margin-left: 60px; margin-right: 60px;"></div>
+<h1 style="margin-left: 60px; margin-top: 30px; margin-bottom: 20px; font-family: Poppins, sans-serif; color: #5F6F52; font-size: 14px;">Home > Shop</h1>
+<p style="font-family: Poppins, sans-serif; font-weight: 700; font-size: 25px; margin-left: 60px; color: #5F6F52;">Products</p>
+<div class="container" style="margin-left: 47px; margin-top: 20px;">
+    <div id="products-container" class="row" style="margin-left: 2px;"></div>
+</div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="{{ asset('js/display.js') }}"></script>
+<div class="ajax-load text-center" style="display:none">
+    <i class="mdi mdi-48px mdi-spin mdi-loading"></i> Loading ...
+</div>
+<div class="no-data text-center mb-4" style="display:none">
+    <b>No data - last page</b>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="{{ asset('js/display.js') }}"></script>
+
 </body>
 </html>

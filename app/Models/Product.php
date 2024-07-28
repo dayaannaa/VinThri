@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
-use App\Models\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
+    use HasFactory;
+
     protected $primaryKey = 'product_id';
 
     protected $fillable = [

@@ -49,8 +49,10 @@
     </style>
 </head>
 <body>
+@include('layouts.header')
+
 <div class="container mt-5">
-    <h2 class="mb-4">Feedbacks</h2>
+    <h2 class="mb-4" style="text-align: center; margin-top: 30px; margin-bottom: 10px; font-family: Alfa Slab One, serif; color: #5F6F52; font-size: 50px;">Feedbacks</h2>
     <div id="feedbackContainer"></div>
 
     <!-- Feedback Modal -->

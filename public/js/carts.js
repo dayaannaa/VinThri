@@ -209,36 +209,53 @@ $(document).ready(function() {
         dataType: 'json',
         success: function(response) {
             console.log(response);
+            if (!response || response.length === 0) {
+                $('#cartItems').append('<p style="text-align: center;">No items in cart.</p>');
+                return;
+            }
             if (response.length > 0) {
                 response.forEach(function(cart) {
                     let images = cart.product.images.split(',');
                     let firstImage = images.length > 0 ? images[0].trim() : '';
-                    $('#cartItems').append(`
-                        <div class="card mb-3" style="max-width: 700px; background-color: #FEFAE0; max-height: 120px; border-left: transparent; border-right: transparent;">
-                            <div class="row g-0">
-                                <div class="col-md-1">
-                                    <div class="form-check mt-2">
-                                        <input class="form-check-input product-checkbox" type="checkbox"
-                                               value="${cart.product_id}"
-                                               data-price="${cart.product.price}"
-                                               data-quantity="${cart.quantity}"
-                                               id="product${cart.product_id}">
-                                        <label class="form-check-label" for="product${cart.product_id}"></label>
+                    $('#cartItems').append(`   
+                        <section class="h-100">
+                            <div class="container h-100 ">
+                                <div class="row d-flex justify-content-center align-items-center h-100">
+                                <div class="col-10">
+                                    <div class="card rounded-3" style="border-right-color: transparent; border-left-color: transparent; border-top-color: #5F6F52; border-bottom-color: #5F6F52;">
+                                    <div class="card-body p-4" style="background-color: #FEFAE0;">
+                                        <div class="row d-flex justify-content-between align-items-center">
+                                        <div class="col-md-1">
+                                            <div class="form-check mt-2">
+                                            <input class="form-check-input product-checkbox" type="checkbox" value="${cart.product_id}" data-price="${cart.product.price}" data-quantity="${cart.quantity}" id="product${cart.product_id}">
+                                            <label class="form-check-label" for="product${cart.product_id}"></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-lg-2 col-xl-2">
+                                            <img src="/imgs/${firstImage}" class="img-fluid rounded-3" style="height: 80px; width: 80px;" alt="Product Image">
+                                        </div>
+                                        <div class="col-md-3 col-lg-3 col-xl-3">
+                                            <p class="lead fw-normal" style="font-family: Alfa Slab One, sans-serif; color: #B99470;">${cart.product.name}</p>
+                                            <p style="font-family: Poppins, serif; color: #5F6F52; font-size: 12px;" class="mb-3">${cart.product.description}</p>
+                                        </div>
+                                        <div class="col-md-3 col-lg-3 col-xl-2 d-flex input-group">
+                                                <button class="btn btn-outline-secondary btn-minus" type="button">-</button>
+                                                <input type="number" class="form-control quantity-input" style="max-width: 100px;" value="${cart.quantity}" min="1">
+                                                <button class="btn btn-outline-secondary btn-plus" type="button">+</button>
+                                            </div>
+                                        <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                                            <h5 class="mb-0" style="font-family: Poppins, serif; color: #5F6F52; font-weight: 800; font-size: 20px;">₱ ${cart.product.price}</h5>
+                                        </div>
+                                        <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                                            <i class="bi bi-trash delete-item text-danger" style="font-size: 25px;" data-cart-id="${cart.cart_id}" style="cursor: pointer;"></i>
+                                        </div>
+                                        </div>
+                                    </div>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
-                                    <img src="/imgs/${firstImage}" class="img-thumbnail" alt="Product Image" style="max-width: 120px; max-height: 120px;">
-                                </div>
-                                <div class="col-md-8" style="align-items: center;">
-                                    <p class="card-title" style="font-family: Poppins, sans-serif; font-weight: 700; color: #B99470; margin-top: 5px; font-size: 18px; margin-bottom: 2px;">${cart.product.name}</p>
-                                    <p class="card-text" style="font-family: Poppins, sans-serif; color: #A9B388; margin-top: 5px; font-size: 12px; margin-bottom: 10px; margin-right: 10px;">${cart.product.description}</p>
-                                    <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 5px;">
-                                        <p class="card-text" style="font-family: Poppins, sans-serif; color: #5F6F52; font-weight: 700; font-size: 20px; margin-bottom: 0;"><strong>&#8369; </strong>${cart.product.price}</p>
-                                        <p class="card-text" style="font-family: Poppins, sans-serif; color: #B99470; margin-right: 10px; margin-bottom: 0;">Quantity: ${cart.quantity}</p>
-                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </section>
                     `);
                 });
 
@@ -349,3 +366,4 @@ $(document).ready(function() {
         });
     }
 });
+

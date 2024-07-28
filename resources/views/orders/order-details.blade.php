@@ -2,6 +2,13 @@
 <html>
 <head>
     <title>Orders</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+            <script src="https://cdn.tailwindcss.com"></script>
+            <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js"></script>
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet">
+            <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
         .order-container {
@@ -42,6 +49,9 @@
     </style>
 </head>
 <body>
+@include('layouts.header')
+<h1 style="text-align: center; margin-top: 30px; margin-bottom: 10px; font-family: Alfa Slab One, serif; color: #5F6F52; font-size: 50px;">Your Orders</h1> <!-- temporary -->
+
     <div id="orders-container" class="container"></div>
 
     <!-- Modal -->
@@ -49,7 +59,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="productsModalLabel">Order Products</h5>
+                    <h5 class="modal-title" id="productsModalLabel">Ordered Products</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -115,17 +125,17 @@ $(document).ready(function() {
 
             response.forEach(function(order) {
                 var orderHtml = `
-                    <div class="order-container">
+                    <div class="order-container mt-5" >
                         <div class="order-header">
                             <div>
-                                <h5>Name: ${order.customer.first_name} ${order.customer.last_name}</h5>
-                                <p>Address: ${order.customer.address}</p>
+                                <h5 style="font-family: Alfa Slab One, sans-serif; color: #B99470;"> ${order.customer.first_name} ${order.customer.last_name}</h5>
+                                <p style="color: #5F6F52; font-family: Poppins, serif;"><strong>Address: </strong>${order.customer.address}</p>
                             </div>
                             <div>
-                                <p>Date: ${order.date}</p>
-                                <p>Status: ${order.status}</p>
+                                <p style="color: #5F6F52; font-family: Poppins, serif;"><strong>Date: </strong>${order.date}</p>
+                                <p style="color: #5F6F52; font-family: Poppins, serif;"><strong>Status: </strong>${order.status}</p>
                                 <div class="order-button">
-                                    <button class="view-products btn btn-primary" data-order-id="${order.order_id}" data-order-status="${order.status}">View Products</button>
+                                    <button class="view-products btn" style="background-color: #5F6F52; color: #FEFAE0;" data-order-id="${order.order_id}" data-order-status="${order.status}">View Products</button>
                                 </div>
                             </div>
                         </div>

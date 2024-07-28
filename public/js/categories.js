@@ -10,8 +10,8 @@ $(document).ready(function() {
             {
                 data: 'category_id',
                 render: function(data) {
-                    return `<button class="btn btn-info btn-sm edit" data-id="${data}">Edit</button>
-                            <button class="btn btn-danger btn-sm delete" data-id="${data}">Delete</button>`;
+                    return `<button class="btn btn-accent btn-sm edit" data-id="${data}">Edit</button>
+                            <button class="btn btn-error btn-sm delete" data-id="${data}">Delete</button>`;
                 }
             }
         ]

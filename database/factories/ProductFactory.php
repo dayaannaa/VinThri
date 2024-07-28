@@ -2,29 +2,26 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Product;
-use App\Models\Category;    
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Product>
- */
 class ProductFactory extends Factory
 {
+    protected $model = Product::class;
+
     /**
      * Define the model's default state.
      *
-     * @return array<string, mixed>
+     * @return array
      */
-
-     protected $model = Product::class;
-    public function definition(): array
+    public function definition()
     {
         return [
             'name' => $this->faker->word,
-            'price' => $this->faker->randomFloat(2, 1, 1000),
-            'description' => $this->faker->sentence,
-            'category_id' => Category::inRandomOrder()->first()->id,
+            'images' => implode(',', $this->faker->randomElements([$this->faker->imageUrl(224, 224, 'products'), $this->faker->imageUrl(224, 224, 'products'), $this->faker->imageUrl(224, 224, 'products')], 3)),
+            'price' => $this->faker->randomFloat(2, 100, 10000),
+            'description' => $this->faker->paragraph,
+            'category_id' => \App\Models\Category::inRandomOrder()->first()->category_id,
         ];
     }
 }
